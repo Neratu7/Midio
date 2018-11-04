@@ -1,0 +1,10 @@
+﻿  main.cpp
+c:\users\welcome\source\repos\midterm1\midterm1\main.cpp(130): warning C4101: 'derp': unreferenced local variable
+c:\users\welcome\source\repos\midterm1\midterm1\main.cpp(165): warning C4101: 'b': unreferenced local variable
+c:\users\welcome\source\repos\midterm1\midterm1\main.cpp(286): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating code
+  313 of 313 functions (100.0%) were compiled.
+    312 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Midterm1.vcxproj -> C:\Users\welcome\source\repos\Midterm1\Release\Midterm1.exe

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Art">
+      <UniqueIdentifier>{4538eaeb-97b7-40dc-b28f-8a7d0ac0d7c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SDL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL2-2.0.8\include\SDL_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="begin_code.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="close_code.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Table_File_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Table_File_core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="SDL2.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="SDL2main.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="SDL2test.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDL2.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Art\generic_platformer_tiles.tsx">
+      <Filter>Art</Filter>
+    </None>
+    <None Include="Art\MidtermTiles.tmx">
+      <Filter>Art</Filter>
+    </None>
+    <None Include="SDL2_image.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="zlib1.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SDL2-2.0.8\lib\x86\libpng16-16.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SDL2-2.0.8\lib\x86\libtiff-5.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SDL2-2.0.8\lib\x86\libwebp-7.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SDL2-2.0.8\lib\x86\libjpeg-9.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Art\AppleTree_allSeasons.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\BombExploding.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\characters.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\generic_platformer_tiles.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\hyptosis_sprites-and-tiles-for-you.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\hyptosis_til-art-batch-2.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\hyptosis_tile-art-batch-1.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\hyptosis_tile-art-batch-3.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\hyptosis_tile-art-batch-4.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\hyptosis_tile-art-batch-5.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\platformertiles.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\sheet.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\swoosh.png">
+      <Filter>Art</Filter>
+    </Image>
+    <Image Include="Art\Tiles.png">
+      <Filter>Art</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

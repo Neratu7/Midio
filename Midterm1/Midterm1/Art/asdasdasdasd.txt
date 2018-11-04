@@ -1,0 +1,468 @@
+#include <iostream>
+#include <assert.h>
+#include <time.h>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <algorithm>
+
+
+#include "SDL2-2.0.8\include\SDL.h"
+#include "SDL2-2.0.8\include\SDL_image.h"
+#include "Table_File_core.h"
+#include "Table_File_data.h"
+
+
+#pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2.lib")
+#pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2main.lib")
+#pragma comment(lib,"SDL2-2.0.8\\lib\\x86\\SDL2_image.lib")
+#pragma comment(linker,"/subsystem:console")
+
+
+using namespace std;
+
+
+namespace Game
+{
+	SDL_Renderer *renderer = NULL;
+	int screen_width = 960;
+	int screen_height = 768;
+
+	SDL_Window *window = SDL_CreateWindow(
+		"Fortnite",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		screen_width, screen_height, SDL_WINDOW_SHOWN);
+}
+
+
+
+
+void PullMap(int y, int x);
+void TilePlacement(vector<vector<int>> &vect);
+SDL_Texture* TexLoad(const char* path);
+void initialize();
+int numRow();
+int numCol();
+void spriteRender(int current_frame, int ffx, int ffy, int fw, int fh, SDL_Texture * runTexture);
+int frameTimer(int last_frame_change_time, int current_frame, int frame_duration, int n_frames);
+
+
+
+int frame = 0;
+int rows = 0;
+int cols = 0;
+
+int pause;
+
+
+
+
+
+
+
+struct tile
+{
+	int x;
+	int y;
+	int w;
+	int h;
+	int col;
+	string name;
+};
+
+
+
+
+int main(int argc, char **argv)
+{
+
+
+
+	unsigned char prev_key_state[256];
+	unsigned char *keys = (unsigned char*)SDL_GetKeyboardState(NULL);
+
+
+	rows = numRow();
+	cout << "********** " << rows << " **********" << endl;
+	cols = numCol();
+	cout << "********** " << cols << " **********" << endl;
+
+
+	PullMap(rows, cols);
+	
+
+
+
+	SDL_Texture* runTexture = NULL;
+	runTexture = TexLoad("Art\\run.png");
+
+	int first_frame_pos_x = 0;
+	int first_frame_pos_y = 0;
+	int frame_w = 108;
+	int frame_h = 140;
+	int n_frames = 8;
+	int frame_duration = 100;
+	unsigned int last_frame_change_time = 0;
+
+	int current_frame = 0;
+
+
+	
+
+
+
+
+
+	bool done = false;
+	while (!done)
+	{
+		memcpy(prev_key_state, keys, 256);
+
+		SDL_Event event;
+		
+
+
+
+
+
+
+
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+			{
+				done = true;
+			}
+
+
+
+			unsigned int current_time = SDL_GetTicks();
+			if (current_time - last_frame_change_time >= frame_duration)
+			{
+				current_frame = (current_frame + 1) % n_frames;
+				last_frame_change_time = current_time;
+				cout << "Derp" << endl;
+			}
+			//last_frame_change_time = current_time;
+			current_frame = frameTimer(last_frame_change_time, current_frame, frame_duration, n_frames);
+			spriteRender(current_frame, first_frame_pos_x, first_frame_pos_y, frame_w, frame_h, runTexture);
+
+
+		}
+
+	}
+
+	return 0;
+}
+
+
+////////////////////////////////
+
+
+int numRow()
+{
+	std::ifstream bork("Art\\Again.txt");
+
+
+	string data;
+	int rowCount = 0;
+	while (getline(bork, data))
+	{
+		rowCount++;
+	}
+	return rowCount;
+}
+
+int numCol()
+{
+	std::ifstream bork("Art\\Again.txt");
+
+	string data;
+	char derp;
+	int colCount = 1;
+	getline(bork, data);
+
+	for (int i = 0; data[i]; i++)
+	{
+		if (data[i] == ',')
+		{
+			colCount++;
+		}
+
+	}
+	return colCount;
+}
+
+
+///////////////////
+
+void PullMap(int y, int x)
+{
+
+	ifstream infile("Art\\Again.txt");
+
+	string line = "";
+
+	vector<vector<int>> map;
+	map.resize(y, std::vector<int>(x, 0));
+
+	{
+
+		string s;
+		int b;
+
+
+		for (int j = 0; j < y; j++)
+		{
+
+			for (int k = 0; k < x; k++)
+			{
+				getline(infile, s, ',');
+				map[j][k] = stoi(s);
+			}
+		}
+
+		cout << endl << "OUTY " << map[5][5] << endl;
+		cout << map[4][3] << endl;
+		cout << map[4][3] << " " << map[2][3] << " " << endl;
+
+		TilePlacement(map);
+	}
+}
+//////////////////
+
+void TilePlacement(vector<vector<int>> &vect)
+{
+
+	cout << vect[3][3] << endl;
+
+
+	int imgFlags = IMG_INIT_PNG;
+
+
+	Game::renderer = SDL_CreateRenderer(Game::window, -1, SDL_RENDERER_ACCELERATED);//renderer for game
+	SDL_Texture * texture = TexLoad("tile.png");//thing for loading textures
+	SDL_SetRenderDrawColor(Game::renderer, 255, 0, 15, 15);
+
+	int x = 0;
+	int y = 0;
+
+
+	SDL_Rect src;
+	src.w = 32;
+	src.h = 32;
+
+	SDL_Rect dest;
+	dest.w = 32;
+	dest.h = 32;
+
+
+
+
+	for (int k = 0; k < rows; k++)
+	{
+
+		for (int j = 0; j < cols; j++)
+		{
+
+
+			switch (vect[k][j])
+			{
+			case 164: //Sky
+			{
+				x = 117;
+				y = 176;
+
+				break;
+			}
+
+			case 88:  //Dirt
+			{
+				x = 784;
+				y = 67;
+
+				break;
+			}
+
+			default: 
+			{
+				x = 99;
+				y = 99;
+
+				break;
+			}
+
+
+		}
+
+
+			//SRC rect
+			src.x = x;
+			src.y = y;
+
+
+
+
+
+			//DEST rect
+			dest.x = j*32;
+			dest.y = k*32;
+
+
+
+
+
+			SDL_RenderCopy(Game::renderer, texture, &src, &dest);
+			SDL_RenderPresent(Game::renderer);
+
+		}
+	}
+}
+
+/////////////////////////////
+
+void initialize()
+{
+	SDL_Init(SDL_INIT_VIDEO);
+	IMG_Init(IMG_INIT_JPG);
+	srand(time(0));
+
+}
+
+///////////////////////////////
+
+SDL_Texture* TexLoad(const char* path) //loads texture from path given, then returns texture
+{
+
+	SDL_Texture* newTexture = NULL;
+	SDL_Surface* loadedSurface = IMG_Load(path);
+	newTexture = SDL_CreateTextureFromSurface(Game::renderer, loadedSurface);
+	SDL_FreeSurface(loadedSurface);
+
+
+	cout << endl << "Texture Path: " << path << " Loaded!" << endl;
+	return newTexture;
+
+};
+
+////////////////////////////////
+
+void end()
+{
+	SDL_DestroyRenderer(Game::renderer);
+	SDL_DestroyWindow(Game::window);
+	Game::renderer = NULL;
+	Game::window = NULL;
+
+	IMG_Quit();
+	SDL_Quit();
+}
+
+/////////////////////////////////
+
+void spriteRender(int current_frame, int ffx,int ffy, int fw, int fh, SDL_Texture * runTexture)
+{
+
+	
+
+	unsigned int current_time = SDL_GetTicks();
+
+	
+	/////////
+
+	//SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
+	//SDL_RenderClear(Game::renderer);
+
+
+
+
+	SDL_Rect src;
+	src.x = ffx + current_frame * fw;
+	src.y = ffy;
+	src.w = fw;
+	src.h = fh;
+
+	SDL_Rect dest;
+	dest.x = Game::screen_width / 2;
+	dest.y = Game::screen_height / 2;
+	dest.w = 32;
+	dest.h = 50;
+
+	SDL_Renderer* renderer = NULL;
+	renderer = SDL_CreateRenderer(Game::window, -1, SDL_RENDERER_ACCELERATED);//renderer for sprite
+	SDL_Surface* loadedSurface = IMG_Load("Art\\run.png");
+	SDL_Texture* newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+
+
+	SDL_RenderCopyEx(renderer, newTexture, &src, &dest, 0, NULL, SDL_FLIP_NONE);
+
+	SDL_RenderPresent(renderer);
+
+	SDL_RenderClear(renderer);
+
+
+
+	//return current_frame;
+
+}
+
+
+
+int frameTimer(int last_frame_change_time, int current_frame, int frame_duration, int n_frames)
+{
+	int currentTime = SDL_GetTicks();
+	if (currentTime - last_frame_change_time >= frame_duration)
+	{
+		current_frame = (current_frame + 1) % n_frames;
+		last_frame_change_time = currentTime;
+	}
+
+	return current_frame;
+}
+
+
+
+
+
+
+/*
+unsigned char *key_state;
+
+
+
+void getkeystate()
+{
+key_state = (unsigned char*)SDL_GetKeyboardState(NULL);
+}
+
+
+void action()
+{
+//get key state from user
+getkeystate();
+//run appropriate action function of character
+if (key_state[SDL_SCANCODE_A] || key_state[SDL_SCANCODE_LEFT])
+{
+run::runleft();
+}
+if (key_state[SDL_SCANCODE_D] || key_state[SDL_SCANCODE_RIGHT])
+{
+run::runright();
+}
+if (key_state[SDL_SCANCODE_W] || key_state[SDL_SCANCODE_UP])
+{
+run::runup();
+}
+if (key_state[SDL_SCANCODE_S] || key_state[SDL_SCANCODE_DOWN])
+{
+run::rundown();
+}
+//update the frame timings
+run::update();
+
+run::runnow = false;
+// populate the rectangle with changes for renderer
+poprect();
+}
+*/

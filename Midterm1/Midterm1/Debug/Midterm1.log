@@ -1,0 +1,19 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Midterm2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+c:\users\welcome\source\repos\midterm1\midterm1\main.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\welcome\source\repos\midterm1\midterm1\table_file_core.h(28): warning C4244: 'initializing': conversion from '__int64' to 'unsigned int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\table_file_core.h(31): warning C4244: 'argument': conversion from '__int64' to 'size_t', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\table_file_core.h(61): warning C4244: '=': conversion from '__int64' to 'unsigned int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\table_file_core.h(93): warning C4244: 'initializing': conversion from '__int64' to 'unsigned int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\table_file_core.h(107): warning C4244: '=': conversion from '__int64' to 'unsigned int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\game.h(69): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\game.h(109): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\tiles.h(173): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\tiles.h(174): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\tiles.h(175): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\tiles.h(176): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\movement.h(87): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\movement.h(88): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\welcome\source\repos\midterm1\midterm1\main.cpp(55): warning C4551: function call missing argument list
+c:\users\welcome\source\repos\midterm1\midterm1\main.cpp(65): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Midterm1.vcxproj -> C:\Users\welcome\source\repos\Midterm1\Debug\Midterm1.exe
